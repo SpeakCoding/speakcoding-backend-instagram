@@ -4,4 +4,6 @@ Rails.application.routes.draw do
       post :authenticate
     end
   end
+
+  resources :posts, only: [:create, :index]
 end
