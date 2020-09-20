@@ -1,0 +1,134 @@
+= SpeakCoding API
+:toc:
+
+SpeakCoding API conforms to https://jsonapi.org/[JSON:API] standard.
+
+== Authentication
+
+Clients get authentication token in response to <<Create User>> and <<Authenticate User>> requests. They MUST include this token with all requests to the API by using `Authentication-Token` header.
+
+== Requests
+
+=== Create User
+
+`POST /users.json`
+
+Client MUST NOT be authenticated.
+
+Parameters: all <<User>> data type parameters and additional `password` parameter for password. Namespaced with `user`.
+
+*Response*
+
+<<User>> structure. Meta contains `authentication_token` to use for authentication.
+
+=== Authenticate User
+
+`POST /users/authenticate.json`
+
+Client MUST NOT be authenticated.
+
+Parameters: `user[email]` and `user[password]`.
+
+*Response*
+
+Same as for <<Create user>>, but for given user.
+
+=== Update User
+
+`PUT /users/:id.json`
+
+Client MUST be authenticated and can only update it's own user.
+
+Parameters: all <<User>> data type parameters.
+
+*Response*
+
+Updated <<User>> structure.
+
+=== Show User
+
+`GET /users/:id.json`
+
+*Response*
+
+<<User>> structure.
+
+=== Create Post
+
+`POST /posts.json`
+
+Client MUST be authenticated.
+
+Parameters: <<Post>> data type parameters namespaced with `post`.
+
+*Response*
+
+<<Post>> structure.
+
+=== List Posts
+
+`POST /posts.json`
+
+*Response*
+
+List of <<Post>> structures.
+
+== Data types
+
+=== User
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|id
+|Integer
+|Identificator of a user
+
+|email
+|String
+|Email address
+
+|full_name
+|String?
+|User name
+
+|bio
+|String?
+|Biography
+
+|portrait
+|String
+|Userpic URL
+|===
+
+=== Post
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|id
+|Integer
+|Identificator of a post
+
+|location
+|String?
+|Location (example: "New York Central Park")
+
+|description
+|String?
+|First post comment of post creator
+
+|image
+|String
+|Post image URL
+
+|user
+|<<User>>
+|Creator of post structure
+
+|created_at
+|Integer
+|UNIX timestamp of Post creation
+|===
