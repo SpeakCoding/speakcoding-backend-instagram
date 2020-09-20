@@ -1,13 +1,23 @@
 class ApplicationController < ActionController::API
   def render_errors(errors, status: 422)
     render json: {
-      errors: errors.map do |paramerer, message| 
-        { 
+      errors: errors.map do |paramerer, message|
+        {
           source: { parameter: paramerer },
           detail: message
         }
       end
     }, status: 422
+  end
+
+  def render_unauthorized
+    render json: {
+      errors: [
+        {
+          detail: "You're not authorized to access this data"
+        }
+      ]
+    }, status: 403
   end
 
   def current_user
