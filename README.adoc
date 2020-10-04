@@ -67,7 +67,7 @@ Parameters: <<Post>> data type parameters namespaced with `post`.
 
 === List Posts
 
-`POST /posts.json`
+`GET /posts.json`
 
 *Response*
 
