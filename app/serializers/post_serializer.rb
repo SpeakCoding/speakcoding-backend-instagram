@@ -11,6 +11,8 @@ class PostSerializer < ApplicationSerializer
       description: @post.description.presence,
       image: @controller&.url_for(@post.image.variant(resize_to_limit: [1080, 1080])),
       user: UserSerializer.new(@post.user, @controller).serialize,
+      likes_count: @post.likes_count,
+      liked: Like.find_by(post: @post, user: @controller.current_user).present?,
       created_at: @post.created_at.to_i
     }
   end

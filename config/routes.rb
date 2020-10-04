@@ -5,5 +5,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [:create, :index]
+  resources :posts, only: [:create, :show, :index] do
+    member do
+      post :like, :unlike
+    end
+  end
 end

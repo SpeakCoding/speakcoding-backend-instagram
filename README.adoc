@@ -73,6 +73,26 @@ Parameters: <<Post>> data type parameters namespaced with `post`.
 
 List of <<Post>> structures.
 
+=== Like Post
+
+`POST /posts/:id/like.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+Updated <<Post>> structure.
+
+=== Unlike Post
+
+`POST /posts/:id/unlike.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+Updated <<Post>> structure.
+
 == Data types
 
 === User
@@ -127,6 +147,14 @@ List of <<Post>> structures.
 |user
 |<<User>>
 |Creator of post structure
+
+|likes_count
+|Integer
+|Total number of likes for this post
+
+|liked
+|Boolean
+|Was this post liked by current user?
 
 |created_at
 |Integer
