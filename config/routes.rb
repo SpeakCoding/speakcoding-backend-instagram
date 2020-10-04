@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     collection do
       post :authenticate
     end
+    member do
+      get :posts
+    end
   end
 
   resources :posts, only: [:create, :show, :index] do

@@ -47,6 +47,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def posts
+    user = User.find(params[:id])
+    posts = user.posts.order('id desc')
+    render json: {
+      data: posts.map { |post| PostSerializer.new(post, self).serialize }
+    }
+  end
+
   private
 
   def user_params

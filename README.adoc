@@ -73,6 +73,14 @@ Parameters: <<Post>> data type parameters namespaced with `post`.
 
 List of <<Post>> structures.
 
+=== List Posts of a user
+
+`GET /users/:user_id/posts.json`
+
+*Response*
+
+List of <<Post>> structures.
+
 === Like Post
 
 `POST /posts/:id/like.json`
