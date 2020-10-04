@@ -120,6 +120,10 @@ Updated <<Post>> structure.
 |portrait
 |String
 |Userpic URL
+
+|posts_count
+|Integer
+|Total number of user's posts
 |===
 
 === Post

@@ -12,7 +12,8 @@ class UserSerializer < ApplicationSerializer
       email: @user.email,
       full_name: @user.full_name.presence,
       bio: @user.bio.presence,
-      portrait: portrait_url
+      portrait: portrait_url,
+      posts_count: @user.posts_count
     }
   end
 
