@@ -50,6 +50,13 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:location, :image, :description)
+    result = params.require(:post).permit(:location, :image, :description)
+    if result[:image].present?
+      tempfile = Tempfile.new("image.jpg")
+      tempfile.write(URI::Data.new(result[:image]).data.force_encoding('UTF-8'))
+      tempfile.close
+      result[:image] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + ".jpg")
+    end
+    result
   end
 end

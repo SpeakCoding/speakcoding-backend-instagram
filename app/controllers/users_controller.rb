@@ -58,6 +58,15 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :full_name, :bio, :portrait)
+    result = params.require(:user).permit(:email, :password, :full_name, :bio, :portrait)
+
+    if result[:portrait].present?
+      tempfile = Tempfile.new("image.jpg")
+      tempfile.write(URI::Data.new(result[:portrait]).data.force_encoding('UTF-8'))
+      tempfile.close
+      result[:portrait] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + ".jpg")
+    end
+
+    result
   end
 end
