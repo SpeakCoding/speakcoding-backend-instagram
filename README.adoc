@@ -53,6 +53,46 @@ Updated <<User>> structure.
 
 <<User>> structure.
 
+=== Follow User
+
+`POST /users/:id/follow.json`
+
+Client MUST be authenticated and MUST NOT follow itself.
+
+*Response*
+
+Updated <<User>> structure of a followee.
+
+=== Unfollow User
+
+`POST /users/:id/unfollow.json`
+
+Client MUST be authenticated and MUST NOT unfollow itself.
+
+*Response*
+
+Updated <<User>> structure of an unfollowee.
+
+=== List followers
+
+`GET /users/:id/followers.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+List of <<User>> structures of a followers.
+
+=== List followees
+
+`GET /users/:id/followees.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+List of <<User>> structures of a followees.
+
 === Create Post
 
 `POST /posts.json`
@@ -132,6 +172,22 @@ Updated <<Post>> structure.
 |posts_count
 |Integer
 |Total number of user's posts
+
+|followers_count
+|Integer
+|Total number of user's followers
+
+|followees_count
+|Integer
+|Total number of user's followees
+
+|is_follower
+|Boolean
+|Is this user a follower of the current user?
+
+|is_followee
+|Boolean
+|Is this user a followee of the current user?
 |===
 
 === Post

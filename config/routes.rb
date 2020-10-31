@@ -4,7 +4,8 @@ Rails.application.routes.draw do
       post :authenticate
     end
     member do
-      get :posts
+      get :followers, :followees, :posts
+      post :follow, :unfollow
     end
   end
 

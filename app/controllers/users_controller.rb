@@ -55,13 +55,51 @@ class UsersController < ApplicationController
     }
   end
 
+  def follow
+    render_unauthorized and return if !current_user
+
+    other_user = User.find(params[:id])
+    current_user.follow(other_user)
+
+    render json: {
+      data: UserSerializer.new(other_user.reload, self).serialize
+    }
+  end
+
+  def unfollow
+    render_unauthorized and return if !current_user
+
+    other_user = User.find(params[:id])
+    current_user.unfollow(other_user)
+
+    render json: {
+      data: UserSerializer.new(other_user.reload, self).serialize
+    }
+  end
+
+  def followers
+    user = User.find(params[:id])
+
+    render json: {
+      data: user.followers.map { |follower| UserSerializer.new(follower, self).serialize }
+    }
+  end
+
+  def followees
+    user = User.find(params[:id])
+
+    render json: {
+      data: user.followees.map { |followee| UserSerializer.new(followee, self).serialize }
+    }
+  end
+
   private
 
   def user_params
     result = params.require(:user).permit(:email, :password, :full_name, :bio, :portrait)
 
     if result[:portrait].present?
-      tempfile = Tempfile.new("image.jpg")
+      tempfile = Tempfile.new('image.jpg')
       tempfile.write(URI::Data.new(result[:portrait]).data.force_encoding('UTF-8'))
       tempfile.close
       result[:portrait] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + ".jpg")
