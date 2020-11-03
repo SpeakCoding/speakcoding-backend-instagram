@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_current_user, only: [:create, :update, :like, :unlike]
+  before_action :require_current_user, only: %i[create update like unlike]
 
   def index
     @posts = Post.order('id desc')

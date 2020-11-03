@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :posts
-  has_many :followers_records, class_name: "Followship", foreign_key: "followee_id", dependent: :destroy
-  has_many :following_records, class_name: "Followship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followers_records, class_name: 'Followship', foreign_key: 'followee_id', dependent: :destroy
+  has_many :following_records, class_name: 'Followship', foreign_key: 'follower_id', dependent: :destroy
   has_many :followers, through: :followers_records, source: :follower
   has_many :followees, through: :following_records, source: :followee
 
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def follow(other_user)
-    return if !can_follow?(other_user)
+    return unless can_follow?(other_user)
 
     followship = Followship.create!(follower: self, followee: other_user)
     User.where(id: other_user.id).update_all(followers_count: Followship.where(followee_id: other_user.id).count)
@@ -52,6 +52,6 @@ class User < ApplicationRecord
   end
 
   def downcase_email
-    self.email&.downcase!
+    email&.downcase!
   end
 end

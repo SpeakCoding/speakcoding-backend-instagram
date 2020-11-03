@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_current_user, only: [:follow, :unfollow]
+  before_action :require_current_user, only: %i[follow unfollow]
 
   def show
     user = User.find(params[:id])

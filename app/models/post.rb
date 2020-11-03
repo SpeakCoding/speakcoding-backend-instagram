@@ -8,6 +8,6 @@ class Post < ApplicationRecord
   private
 
   def image_should_be_attached
-    errors.add(:image, "isn't attached") if !image.attached?
+    errors.add(:image, "isn't attached") unless image.attached?
   end
 end

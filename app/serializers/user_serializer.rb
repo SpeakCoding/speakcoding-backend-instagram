@@ -22,8 +22,8 @@ class UserSerializer < ApplicationSerializer
   end
 
   def portrait_url
-    return nil if !@user.portrait.attached?
-    return nil if !@controller
+    return nil unless @user.portrait.attached?
+    return nil unless @controller
 
     @controller.url_for(@user.portrait.variant(resize_to_limit: [1080, 1080]))
   end
