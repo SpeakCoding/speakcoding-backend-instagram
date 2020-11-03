@@ -227,4 +227,27 @@ Updated <<Post>> structure.
 |created_at
 |Integer
 |UNIX timestamp of Post creation
+
+|tags
+|Array of <<Tag>> structures
+|Tags of people on the photo
+|===
+
+=== Tag
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|user
+|<<User>>
+|Tagged user
+
+|top
+|Float
+|Tag offfset from top (0.0..1.0)
+
+|top
+|Float
+|Tag offfset from left (0.0..1.0)
 |===

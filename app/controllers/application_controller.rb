@@ -26,4 +26,11 @@ class ApplicationController < ActionController::API
 
     @current_user ||= User.find_by(authentication_token: authentication_token)
   end
+
+  def require_current_user
+    if current_user.blank?
+      render json: { errors: [{ source: { parameter: 'user_id' }, detail: 'not authorized'}] }, status: 403
+      return
+    end
+  end
 end

@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def follow
-    render_unauthorized and return if !current_user
+    render_unauthorized and return unless current_user
 
     other_user = User.find(params[:id])
     current_user.follow(other_user)
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    render_unauthorized and return if !current_user
+    render_unauthorized and return unless current_user
 
     other_user = User.find(params[:id])
     current_user.unfollow(other_user)
@@ -102,7 +102,7 @@ class UsersController < ApplicationController
       tempfile = Tempfile.new('image.jpg')
       tempfile.write(URI::Data.new(result[:portrait]).data.force_encoding('UTF-8'))
       tempfile.close
-      result[:portrait] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + ".jpg")
+      result[:portrait] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + '.jpg')
     end
 
     result

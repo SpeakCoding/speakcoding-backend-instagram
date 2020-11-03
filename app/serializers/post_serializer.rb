@@ -13,7 +13,8 @@ class PostSerializer < ApplicationSerializer
       user: UserSerializer.new(@post.user, @controller).serialize,
       likes_count: @post.likes_count,
       liked: Like.find_by(post: @post, user: @controller.current_user).present?,
-      created_at: @post.created_at.to_i
+      created_at: @post.created_at.to_i,
+      tags: @post.user_post_tags.map { |tag| UserPostTagSerializer.new(tag, @controller).serialize }
     }
   end
 end
