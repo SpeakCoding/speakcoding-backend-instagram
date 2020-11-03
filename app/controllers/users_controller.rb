@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_current_user, only: [:follow, :unfollow]
+
   def show
     user = User.find(params[:id])
     render json: {
@@ -56,8 +58,6 @@ class UsersController < ApplicationController
   end
 
   def follow
-    render_unauthorized and return unless current_user
-
     other_user = User.find(params[:id])
     current_user.follow(other_user)
 
@@ -67,8 +67,6 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    render_unauthorized and return unless current_user
-
     other_user = User.find(params[:id])
     current_user.unfollow(other_user)
 

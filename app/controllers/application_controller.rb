@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
           detail: message
         }
       end
-    }, status: 422
+    }, status: status
   end
 
   def render_unauthorized
@@ -21,16 +21,15 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    authentication_token = request.headers["Authentication-Token"]
+    authentication_token = request.headers['Authentication-Token']
     return nil if authentication_token.blank?
 
     @current_user ||= User.find_by(authentication_token: authentication_token)
   end
 
   def require_current_user
-    if current_user.blank?
-      render json: { errors: [{ source: { parameter: 'user_id' }, detail: 'not authorized'}] }, status: 403
-      return
-    end
+    return if current_user.present?
+
+    render json: { errors: [{ source: { parameter: 'user_id' }, detail: 'not authorized' }] }, status: 403
   end
 end
