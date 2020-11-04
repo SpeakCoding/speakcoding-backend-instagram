@@ -247,7 +247,7 @@ Updated <<Post>> structure.
 |Float
 |Tag offfset from top (0.0..1.0)
 
-|top
+|left
 |Float
 |Tag offfset from left (0.0..1.0)
 |===
