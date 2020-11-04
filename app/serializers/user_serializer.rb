@@ -15,7 +15,7 @@ class UserSerializer < ApplicationSerializer
       portrait: portrait_url,
       posts_count: @user.posts_count,
       followers_count: @user.followers_count,
-      followees_count: @user.followers_count,
+      followees_count: @user.followees_count,
       is_followee: @controller&.current_user&.follows?(@user),
       is_follower: @user.follows?(@controller&.current_user)
     }
