@@ -73,6 +73,16 @@ Client MUST be authenticated and MUST NOT unfollow itself.
 
 Updated <<User>> structure of an unfollowee.
 
+=== Search Users
+
+`GET /users/search.json`
+
+Parameters: `query` (search query).
+
+*Response*
+
+List of <<User>> structures. Top 10 search results.
+
 === List followers
 
 `GET /users/:id/followers.json`

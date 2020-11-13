@@ -91,6 +91,13 @@ class UsersController < ApplicationController
     }
   end
 
+  def search
+    users = User.where('full_name LIKE ?', params[:query] + '%').limit(10)
+    render json: {
+      data: users.map { |user| UserSerializer.new(user, self).serialize }
+    }
+  end
+
   private
 
   def user_params
