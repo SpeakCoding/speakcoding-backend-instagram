@@ -161,7 +161,7 @@ Client MUST be authenticated.
 
 Updated <<Post>> structure.
 
-=== Unlike Post
+=== Unsave Post
 
 `POST /posts/:id/unsave.json`
 
