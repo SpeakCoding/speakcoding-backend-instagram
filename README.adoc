@@ -179,6 +179,28 @@ Updated <<Post>> structure.
 
 List of <<Post>> structures.
 
+=== List posts where specific user where tagged
+
+`GET /posts/tagged.json`
+
+Client MUST be authenticated.
+
+Parameters:
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|user_id
+|Integer?
+|ID of tagged user. If not provided, current user will be picked.
+
+|===
+
+*Response*
+
+List of <<Post>> structures.
+
 == Data types
 
 === User
