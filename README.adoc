@@ -151,6 +151,34 @@ Client MUST be authenticated.
 
 Updated <<Post>> structure.
 
+=== Save Post
+
+`POST /posts/:id/save.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+Updated <<Post>> structure.
+
+=== Unlike Post
+
+`POST /posts/:id/unsave.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+Updated <<Post>> structure.
+
+=== List saved posts
+
+`GET /posts/saved.json`
+
+*Response*
+
+List of <<Post>> structures.
+
 == Data types
 
 === User
@@ -233,6 +261,10 @@ Updated <<Post>> structure.
 |liked
 |Boolean
 |Was this post liked by current user?
+
+|saved
+|Boolean
+|Was this post saved by current user?
 
 |created_at
 |Integer

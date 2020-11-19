@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:create, :show, :index, :update] do
     member do
-      post :like, :unlike
+      post :like, :unlike, :save, :unsave
+    end
+    collection do
+      get :saved, :tagged
     end
   end
 end

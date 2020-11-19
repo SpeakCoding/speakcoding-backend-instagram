@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'PostsController', type: :request do
-  it 'should index posts' do
+  it 'should like and unlike posts' do
     user = User.create(email: 'alx.gsv@gmail.com', password: '123456')
     post = Post.create(user: user, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
 

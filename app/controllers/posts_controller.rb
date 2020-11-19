@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_current_user, only: %i[create update like unlike]
+  before_action :require_current_user, only: %i[create update like unlike save unsave]
 
   def index
     @posts = Post.order('id desc')
@@ -59,6 +59,36 @@ class PostsController < ApplicationController
     else
       render json: { errors: [{ source: { parameter: 'id' }, detail: 'not found' }] }, status: 404
     end
+  end
+
+  def save
+    @post_saved = PostSaved.where(post_id: params[:id], user: current_user).take
+    if @post_saved.blank?
+      PostSaved.create!(post_id: params[:id], user: current_user)
+      post = Post.find(params[:id])
+      render json: { data: PostSerializer.new(post, self).serialize }
+    else
+      render json: { errors: [{ source: { parameter: 'id' }, detail: 'already saved' }] }, status: 409
+    end
+  end
+
+  def unsave
+    @post_saved = PostSaved.where(post_id: params[:id], user: current_user).take
+    if @post_saved.present?
+      @post_saved.destroy
+      post = Post.find(params[:id])
+      render json: { data: PostSerializer.new(post, self).serialize }
+    else
+      render json: { errors: [{ source: { parameter: 'id' }, detail: 'not found' }] }, status: 404
+    end
+  end
+
+  def saved
+    @posts_saved = PostSaved.preload(:post).where(user: current_user).order('created_at desc')
+    @posts = @posts_saved.map(&:post)
+    render json: {
+      data: @posts.map { |post| PostSerializer.new(post, self).serialize }
+    }
   end
 
   private
