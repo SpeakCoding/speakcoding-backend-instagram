@@ -284,6 +284,10 @@ List of <<Post>> structures.
 |Boolean
 |Was this post liked by current user?
 
+|liker_followee
+|<<User>>
+|Followee of a current user that liked this post
+
 |saved
 |Boolean
 |Was this post saved by current user?
