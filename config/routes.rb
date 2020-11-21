@@ -18,4 +18,6 @@ Rails.application.routes.draw do
       get :saved, :tagged
     end
   end
+
+  resources :comments, only: [:create, :update, :destroy]
 end

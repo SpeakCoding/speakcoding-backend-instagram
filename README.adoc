@@ -201,6 +201,64 @@ Parameters:
 
 List of <<Post>> structures.
 
+=== Create comment
+
+`POST /comments.json`
+
+Client MUST be authenticated.
+
+Parameters:
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|comment[post_id]
+|Integer
+|Post ID
+
+|comment[body]
+|String
+|Comment text
+
+|===
+
+*Response*
+
+New <<Comment>> structure.
+
+=== Update comment
+
+`PUT /comments/:id.json`
+
+Client MUST be authenticated.
+
+Parameters:
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|comment[body]
+|String
+|Comment text
+
+|===
+
+*Response*
+
+Updated <<Comment>> structure.
+
+=== Delete comment
+
+`Delete /comments/:id.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+Deleted <<Comment>> structure (state before deletion).
+
 == Data types
 
 === User
@@ -299,7 +357,35 @@ List of <<Post>> structures.
 |tags
 |Array of <<Tag>> structures
 |Tags of people on the photo
+
+|comments
+|Array of <<Comment>> structures
+|Ordered array of post comments
 |===
+
+=== Comment
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|id
+|Integer
+|Comment ID
+
+|user
+|<<User>>
+|Comment creator
+
+|body
+|String
+|Comment text
+
+|created_at
+|Integer
+|UNIX timestamp of Comment creation
+|===
+
 
 === Tag
 

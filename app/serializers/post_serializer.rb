@@ -17,7 +17,8 @@ class PostSerializer < ApplicationSerializer
       liker_followee: UserSerializer.new(liker_followee, @controller).serialize,
       saved: PostSaved.find_by(post: @post, user: @controller.current_user).present?,
       created_at: @post.created_at.to_i,
-      tags: @post.user_post_tags.map { |tag| UserPostTagSerializer.new(tag, @controller).serialize }
+      tags: @post.user_post_tags.map { |tag| UserPostTagSerializer.new(tag, @controller).serialize },
+      comments: @post.comments.map{ |comment| CommentSerializer.new(comment, @controller).serialize }
     }
   end
 end

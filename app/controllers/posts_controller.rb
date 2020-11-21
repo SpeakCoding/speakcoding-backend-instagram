@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :require_current_user, only: %i[create update like unlike save unsave tagged]
 
   def index
-    @posts = Post.order('id desc')
+    @posts = Post.preload(:comments).order('id desc')
     render json: {
       data: @posts.map { |post| PostSerializer.new(post, self).serialize }
     }
@@ -93,7 +93,7 @@ class PostsController < ApplicationController
 
   def tagged
     @user = User.where(id: params[:user_id]).take || current_user
-    @user_post_tags = UserPostTag.preload(:post).where(user: @user)
+    @user_post_tags = UserPostTag.preload(post: :comments).where(user: @user)
     @posts = @user_post_tags.map(&:post)
     render json: {
       data: @posts.map { |post| PostSerializer.new(post, self).serialize }
