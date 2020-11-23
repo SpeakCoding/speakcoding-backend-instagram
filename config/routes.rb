@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:create, :show, :index, :update, :destroy] do
     member do
       post :like, :unlike, :save, :unsave
+      get :likers
     end
     collection do
       get :saved, :tagged

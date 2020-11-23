@@ -68,6 +68,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def likers
+    @likes = Like.preload(:user).where(post_id: params[:id]).order("created_at desc")
+    @users = @likes.map(&:user)
+
+    render json: {
+      data: @users.map { |user| UserSerializer.new(user, self).serialize }
+    }
+  end
+
   def save
     @post_saved = PostSaved.where(post_id: params[:id], user: current_user).take
     if @post_saved.blank?

@@ -173,6 +173,14 @@ Client MUST be authenticated.
 
 Updated <<Post>> structure.
 
+=== List Post likers
+
+`GET /posts/:id/likers.json`
+
+*Response*
+
+List of <User>> structures.
+
 === Save Post
 
 `POST /posts/:id/save.json`
