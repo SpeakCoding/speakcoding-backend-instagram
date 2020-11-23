@@ -11,6 +11,11 @@ class UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.save
+      # Followships with seed users
+      User.where(seed: true).first(5).each do |seed_user|
+        user.follow(seed_user)
+        seed_user.follow(user)
+      end
       render json: {
         data: UserSerializer.new(user, self).serialize,
         meta: { authentication_token: user.authentication_token }

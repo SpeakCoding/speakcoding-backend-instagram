@@ -69,6 +69,8 @@ GEM
     data_uri (0.1.0)
     diff-lcs (1.4.4)
     erubi (1.9.0)
+    faker (2.14.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     ffi (1.13.1-java)
     ffi (1.13.1-x64-mingw32)
@@ -199,6 +201,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   data_uri
+  faker
   image_processing (~> 1.2)
   listen (~> 3.2)
   puma (~> 4.1)
