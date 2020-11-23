@@ -50,6 +50,15 @@ followers.each do |user|
   end
 end
 
+# Existing users followship
+seed_users = User.where(seed: true).to_a
+User.where(seed: false).each do |user|
+  seed_users.each do |seed_user|
+    user.follow(seed_user)
+    seed_user.follow(user)
+  end
+end
+
 # Creating some likes
 users = User.where(seed: true).to_a
 Post.where(user: users).each do |post|
