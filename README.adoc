@@ -115,6 +115,28 @@ Parameters: <<Post>> data type parameters namespaced with `post`.
 
 <<Post>> structure.
 
+=== Update Post
+
+`PUT /posts/:id.json`
+
+Client MUST be authenticated.
+
+Parameters: <<Post>> data type parameters namespaced with `post`.
+
+*Response*
+
+<<Post>> structure.
+
+=== Destroy Post
+
+`DELETE /posts/:id.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+<<Post>> structure of recently deleted post.
+
 === List Posts
 
 `GET /posts.json`

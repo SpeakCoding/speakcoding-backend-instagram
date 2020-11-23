@@ -39,6 +39,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+
+    render json: { data: PostSerializer.new(@post, self).serialize }
+  end
+
   def like
     @like = Like.where(post_id: params[:id], user: current_user).take
     if @like.blank?

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [:create, :show, :index, :update] do
+  resources :posts, only: [:create, :show, :index, :update, :destroy] do
     member do
       post :like, :unlike, :save, :unsave
     end
