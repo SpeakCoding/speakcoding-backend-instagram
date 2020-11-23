@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
-  before_action :require_current_user, only: %i[create update like unlike save unsave tagged]
+  before_action :require_current_user, only: %i[index create update like unlike save unsave tagged]
 
   def index
-    @posts = Post.preload(:comments).order('id desc')
+    users = current_user.followees.to_a + [current_user]
+    @posts = Post.preload(:comments).where(user: users).order('id desc')
     render json: {
       data: @posts.map { |post| PostSerializer.new(post, self).serialize }
     }
