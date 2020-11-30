@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     users = current_user.followees.to_a + [current_user]
-    @posts = Post.preload(:comments).where(user: users).order('id desc')
+    @posts = Post.preload(:comments).where(user: users).order('created_at desc')
     render json: {
       data: @posts.map { |post| PostSerializer.new(post, self).serialize }
     }
