@@ -9,7 +9,7 @@ class PostSerializer < ApplicationSerializer
     {
       id: @post.id,
       location: @post.location.presence,
-      description: @post.description.presence,
+      caption: @post.caption.presence,
       image: @controller&.url_for(@post.image.variant(resize_to_limit: [1080, 1080])),
       user: UserSerializer.new(@post.user, @controller).serialize,
       likes_count: @post.likes_count,

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'PostsController', type: :request do
   it 'should like and unlike posts' do
     user = User.create(email: 'alx.gsv@gmail.com', password: '123456')
-    post = Post.create(user: user, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
+    post = Post.create(user: user, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
 
     get "/posts/#{post.id}.json", headers: { "Authentication-Token": user.authentication_token }
     expect(response.code.to_i).to eq(200)
@@ -35,7 +35,7 @@ RSpec.describe 'PostsController', type: :request do
     user1 = User.create(email: 'alx.gsv@gmail.com', password: '123456')
     user2 = User.create(email: 'alexander@gmail.com', password: '123456')
     user1.follow(user2)
-    post = Post.create(user: user1, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
+    post = Post.create(user: user1, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
 
     get "/posts/#{post.id}.json", headers: { "Authentication-Token": user1.authentication_token }
     expect(response.code.to_i).to eq(200)

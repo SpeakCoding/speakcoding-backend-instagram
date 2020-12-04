@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'CommentsController', type: :request do
   it 'should create comments' do
     user = User.create(email: 'alx.gsv@gmail.com', password: '123456')
-    post = Post.create(user: user, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
+    post = Post.create(user: user, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
 
     get "/posts/#{post.id}.json", headers: { "Authentication-Token": user.authentication_token }
     expect(response.code.to_i).to eq(200)

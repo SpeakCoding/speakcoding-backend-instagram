@@ -120,7 +120,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    result = params.require(:post).permit(:location, :image, :description)
+    result = params.require(:post).permit(:location, :image, :caption)
     if result[:image].present?
       tempfile = Tempfile.new('image.jpg')
       tempfile.write(URI::Data.new(result[:image]).data.force_encoding('UTF-8'))

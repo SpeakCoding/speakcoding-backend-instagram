@@ -4,7 +4,7 @@ RSpec.describe 'PostsController', type: :request do
   it 'should like and unlike posts' do
     user1 = User.create(email: 'alex@gmail.com', password: '123456')
     user2 = User.create(email: 'alexander@gmail.com', password: '123456')
-    post = Post.create(user: user1, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
+    post = Post.create(user: user1, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
     Like.create!(post: post, user: user1, created_at: 1.day.ago)
     Like.create!(post: post, user: user2)
 

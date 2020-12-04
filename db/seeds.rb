@@ -24,19 +24,19 @@ if ENV['CLEANUP'] == 'true'
   return
 end
 
-post_descriptions = CSV.read(__dir__ + '/seeds/posts_descriptions.csv').transpose
-user_descriptions = CSV.read(__dir__ + '/seeds/users_descriptions.csv').transpose
+post_captions = CSV.read(__dir__ + '/seeds/posts_captions.csv').transpose
+user_captions = CSV.read(__dir__ + '/seeds/users_captions.csv').transpose
 cities = CSV.read(__dir__ + '/seeds/cities.csv').flatten
 comments = File.readlines(__dir__ + '/seeds/comments.txt').to_a.map(&:strip)
 
 # Creating users and posts
-user_descriptions.each_with_index do |(full_name, bio), index_user|
+user_captions.each_with_index do |(full_name, bio), index_user|
   portrait_path = __dir__ + "/seeds/users/#{index_user}/userpic.png"
   user = User.create!(full_name: full_name, bio: bio, portrait: blob(portrait_path), email: Faker::Internet.email, password: SecureRandom.alphanumeric(10), seed: true)
-  post_descriptions[index_user].each_with_index do |description, index_post|
+  post_captions[index_user].each_with_index do |caption, index_post|
     time = index_post.days.ago - rand(60 * 60 * 3).seconds
     post_path = __dir__ + "/seeds/users/#{index_user}/posts/images/image-#{index_post}.png"
-    post = user.posts.create!(description: description, location: cities.sample, image: blob(post_path), created_at: time, updated_at: time)
+    post = user.posts.create!(caption: caption, location: cities.sample, image: blob(post_path), created_at: time, updated_at: time)
   end
 end
 

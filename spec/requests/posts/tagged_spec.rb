@@ -10,7 +10,7 @@ RSpec.describe 'PostsController', type: :request do
     expect(response.parsed_body['data'].size).to eq(0)
 
     tags = [{ user_id: user2.id, top: 0.12, left: 0.34 }]
-    post '/posts.json', params: { post: { description: 'a', location: 'b', image: uri_scheme_encode_image('images/lenna.png'), tags: tags } }, headers: { "Authentication-Token": user1.authentication_token }
+    post '/posts.json', params: { post: { caption: 'a', location: 'b', image: uri_scheme_encode_image('images/lenna.png'), tags: tags } }, headers: { "Authentication-Token": user1.authentication_token }
     expect(response.code.to_i).to eq(200)
 
     get '/posts/tagged.json', params: { user_id: user2.id }, headers: { "Authentication-Token": user1.authentication_token }

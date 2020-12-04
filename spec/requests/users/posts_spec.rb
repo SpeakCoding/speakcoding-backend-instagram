@@ -9,7 +9,7 @@ RSpec.describe 'UsersController', type: :request do
       bio: 'bio',
       password: '123456'
     )
-    post1 = Post.create(user: user1, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
+    post1 = Post.create(user: user1, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
     user2 = User.create(
       email: 'd@e.f',
       full_name: 'Anna',
@@ -21,7 +21,7 @@ RSpec.describe 'UsersController', type: :request do
     expect(response.code.to_i).to eq(200)
     expect(response.parsed_body['data'].size).to eq(0)
 
-    post2 = Post.create(user: user2, description: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
+    post2 = Post.create(user: user2, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
     get "/users/#{user2.id}/posts.json"
     expect(response.code.to_i).to eq(200)
     expect(response.parsed_body['data'].size).to eq(1)

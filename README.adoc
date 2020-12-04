@@ -352,7 +352,7 @@ Deleted <<Comment>> structure (state before deletion).
 |String?
 |Location (example: "New York Central Park")
 
-|description
+|caption
 |String?
 |First post comment of post creator
 
