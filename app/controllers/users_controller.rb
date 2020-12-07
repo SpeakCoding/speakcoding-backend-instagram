@@ -103,6 +103,16 @@ class UsersController < ApplicationController
     }
   end
 
+  def whats_new
+    user = User.find(params[:id])
+
+    @likes = Like.joins(:post).where(posts: { user_id: user.id }).order('posts.created_at desc')
+
+    render json: {
+      data: @likes.map { |like| LikeSerializer.new(like, self).serialize }
+    }
+  end
+
   private
 
   def user_params

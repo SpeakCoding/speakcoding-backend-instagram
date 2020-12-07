@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get :search
     end
     member do
-      get :followers, :followees, :posts
+      get :followers, :followees, :posts, :whats_new
       post :follow, :unfollow
     end
   end

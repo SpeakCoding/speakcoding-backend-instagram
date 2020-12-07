@@ -145,6 +145,15 @@ Client MUST be authenticated.
 
 List of <<Post>> structures.
 
+=== Get What's new feed
+
+`GET /users/:id/whats_new.json`
+
+*Response*
+
+List of <<Like>> structures.
+
+
 === List Posts of a user
 
 `GET /users/:user_id/posts.json`
@@ -416,6 +425,25 @@ Deleted <<Comment>> structure (state before deletion).
 |UNIX timestamp of Comment creation
 |===
 
+
+=== Like
+
+[%header,cols="1%,1%,98%"]
+|===
+|Attribute name |Type |Description
+
+|user
+|<<User>>
+|Liker user
+
+|post
+|<<Post>>
+|Liked post
+
+|created_at
+|Integer
+|
+|===
 
 === Tag
 
