@@ -33,6 +33,16 @@ Parameters: `user[email]` and `user[password]`.
 
 Same as for <<Create user>>, but for given user.
 
+=== Forget User's authentication token
+
+`POST /users/forget.json`
+
+Client MUST be authenticated.
+
+*Response*
+
+Blank object `{}`.
+
 === Update User
 
 `PUT /users/:id.json`

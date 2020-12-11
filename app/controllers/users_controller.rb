@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_current_user, only: %i[follow unfollow]
+  before_action :require_current_user, only: %i[follow unfollow forget]
 
   def show
     user = User.find(params[:id])
@@ -52,6 +52,13 @@ class UsersController < ApplicationController
     else
       render json: { errors: [{ source: { parameter: 'password' }, detail: "doesn't match email" }] }, status: 403
     end
+  end
+
+  def forget
+    current_user.update(authentication_token: nil)
+    render json: {
+      data: {}
+    }
   end
 
   def posts
