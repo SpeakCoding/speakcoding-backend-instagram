@@ -25,7 +25,7 @@ if ENV['CLEANUP'] == 'true'
 end
 
 post_captions = CSV.read(__dir__ + '/seeds/posts_captions.csv').transpose
-user_captions = CSV.read(__dir__ + '/seeds/users_captions.csv').transpose
+user_captions = CSV.read(__dir__ + '/seeds/users_descriptions.csv').transpose
 cities = CSV.read(__dir__ + '/seeds/cities.csv').flatten
 comments = File.readlines(__dir__ + '/seeds/comments.txt').to_a.map(&:strip)
 
