@@ -86,13 +86,13 @@ ActiveRecord::Schema.define(version: 2020_11_21_191420) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "user_name"
+    t.string "bio"
     t.string "email"
     t.string "password_digest"
     t.string "authentication_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "user_name"
-    t.string "bio"
     t.integer "posts_count", default: 0, null: false
     t.bigint "followers_count", default: 0, null: false
     t.bigint "followees_count", default: 0, null: false
