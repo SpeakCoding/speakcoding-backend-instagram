@@ -8,7 +8,7 @@ class CommentSerializer < ApplicationSerializer
     {
       id: @comment.id,
       user: UserSerializer.new(@comment.user, @controller).serialize,
-      body: @comment.body,
+      text: @comment.text,
       created_at: @comment.created_at.to_i
     }
   end

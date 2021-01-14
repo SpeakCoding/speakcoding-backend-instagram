@@ -4,16 +4,16 @@ RSpec.describe 'UsersController', type: :request do
   it 'should show user' do
     user1 = User.create(
       email: 'a@b.c',
-      full_name: 'Elena',
-      portrait: fixture_file_upload('images/lenna.png', 'image/png'),
+      user_name: 'Elena',
+      profile_picture: fixture_file_upload('images/lenna.png', 'image/png'),
       bio: 'bio',
       password: '123456'
     )
     post1 = Post.create(user: user1, caption: 'a', location: 'b', image: fixture_file_upload('images/lenna.png', 'image/png'))
     user2 = User.create(
       email: 'd@e.f',
-      full_name: 'Anna',
-      portrait: fixture_file_upload('images/lenna.png', 'image/png'),
+      user_name: 'Anna',
+      profile_picture: fixture_file_upload('images/lenna.png', 'image/png'),
       bio: 'bio',
       password: '654321'
     )

@@ -10,9 +10,9 @@ class UserSerializer < ApplicationSerializer
     {
       id: @user.id,
       email: @user.email,
-      full_name: @user.full_name.presence,
+      user_name: @user.user_name.presence,
       bio: @user.bio.presence,
-      portrait: portrait_url,
+      profile_picture: profile_picture_url,
       posts_count: @user.posts_count,
       followers_count: @user.followers_count,
       followees_count: @user.followees_count,
@@ -21,10 +21,10 @@ class UserSerializer < ApplicationSerializer
     }
   end
 
-  def portrait_url
-    return nil unless @user.portrait.attached?
+  def profile_picture_url
+    return nil unless @user.profile_picture.attached?
     return nil unless @controller
 
-    @controller.url_for(@user.portrait.variant(resize_to_limit: [1080, 1080]))
+    @controller.url_for(@user.profile_picture.variant(resize_to_limit: [1080, 1080]))
   end
 end

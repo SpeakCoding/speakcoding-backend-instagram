@@ -30,9 +30,9 @@ cities = CSV.read(__dir__ + '/seeds/cities.csv').flatten
 comments = File.readlines(__dir__ + '/seeds/comments.txt').to_a.map(&:strip)
 
 # Creating users and posts
-user_captions.each_with_index do |(full_name, bio), index_user|
-  portrait_path = __dir__ + "/seeds/users/#{index_user}/userpic.png"
-  user = User.create!(full_name: full_name, bio: bio, portrait: blob(portrait_path), email: Faker::Internet.email, password: SecureRandom.alphanumeric(10), seed: true)
+user_captions.each_with_index do |(user_name, bio), index_user|
+  profile_picture_path = __dir__ + "/seeds/users/#{index_user}/userpic.png"
+  user = User.create!(user_name: user_name, bio: bio, profile_picture: blob(profile_picture_path), email: Faker::Internet.email, password: SecureRandom.alphanumeric(10), seed: true)
   post_captions[index_user].each_with_index do |caption, index_post|
     time = index_post.days.ago - rand(60 * 60 * 3).seconds
     post_path = __dir__ + "/seeds/users/#{index_user}/posts/images/image-#{index_post}.png"
@@ -77,6 +77,6 @@ Post.where(user: users).each do |post|
 
   shuffled_users = users.shuffle
   comments_count.times do |i|
-    Comment.create(user: shuffled_users[i], post: post, body: comments.sample)
+    Comment.create(user: shuffled_users[i], post: post, text: comments.sample)
   end
 end

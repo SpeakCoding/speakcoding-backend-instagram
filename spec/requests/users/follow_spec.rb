@@ -4,13 +4,13 @@ RSpec.describe 'UsersController', type: :request do
   it 'should follow and unfollow user' do
     user0 = User.create(
       email: 'a@b.c',
-      full_name: 'Elena',
+      user_name: 'Elena',
       password: '123456'
     )
 
     user1 = User.create(
       email: 'd@e.f',
-      full_name: 'Alex',
+      user_name: 'Alex',
       password: '789012'
     )
 

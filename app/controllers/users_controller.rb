@@ -104,7 +104,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    users = User.where('full_name LIKE ?', params[:query] + '%').limit(10)
+    users = User.where('user_name LIKE ?', params[:query] + '%').limit(10)
     render json: {
       data: users.map { |user| UserSerializer.new(user, self).serialize }
     }
@@ -123,13 +123,13 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    result = params.require(:user).permit(:email, :password, :full_name, :bio, :portrait)
+    result = params.require(:user).permit(:email, :password, :user_name, :bio, :profile_picture)
 
-    if result[:portrait].present?
+    if result[:profile_picture].present?
       tempfile = Tempfile.new('image.jpg')
-      tempfile.write(URI::Data.new(result[:portrait]).data.force_encoding('UTF-8'))
+      tempfile.write(URI::Data.new(result[:profile_picture]).data.force_encoding('UTF-8'))
       tempfile.close
-      result[:portrait] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + '.jpg')
+      result[:profile_picture] = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: SecureRandom.alphanumeric(10) + '.jpg')
     end
 
     result

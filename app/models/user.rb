@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :followees, through: :following_records, source: :followee
 
   has_secure_password
-  has_one_attached :portrait
+  has_one_attached :profile_picture
 
   before_validation :downcase_email, :ensure_authentication_token
 

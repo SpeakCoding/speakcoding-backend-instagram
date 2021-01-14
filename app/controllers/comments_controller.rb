@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :require_current_user, only: %i[create update destroy]
 
   def create
-    attributes = params.require(:comment).permit(:post_id, :body)
+    attributes = params.require(:comment).permit(:post_id, :text)
     @comment = Comment.new(attributes)
     @comment.user = current_user
 
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
 
-    attributes = params.require(:comment).permit(:body)
+    attributes = params.require(:comment).permit(:text)
 
     @comment.attributes = attributes
 
