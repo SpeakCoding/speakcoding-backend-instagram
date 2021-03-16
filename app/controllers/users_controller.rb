@@ -43,8 +43,6 @@ class UsersController < ApplicationController
   def authenticate
     user = User.find_by(email: user_params[:email])
     if user&.authenticate(user_params[:password])
-      user.regenerate_authentication_token
-      user.save!
       render json: {
         data: UserSerializer.new(user, self).serialize,
         meta: { authentication_token: user.authentication_token }

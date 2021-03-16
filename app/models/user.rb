@@ -41,14 +41,14 @@ class User < ApplicationRecord
     User.where(id: id).update_all(followees_count: Followship.where(follower_id: id).count)
   end
 
-  def regenerate_authentication_token
-    self.authentication_token = SecureRandom.alphanumeric(50)
+  def generate_authentication_token
+    self.authentication_token ||= SecureRandom.alphanumeric(50)
   end
 
   private
 
   def ensure_authentication_token
-    regenerate_authentication_token if authentication_token.blank?
+    generate_authentication_token if authentication_token.blank?
   end
 
   def downcase_email
