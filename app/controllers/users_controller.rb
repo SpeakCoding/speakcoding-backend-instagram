@@ -2,7 +2,13 @@ class UsersController < ApplicationController
   before_action :require_current_user, only: %i[follow unfollow forget]
 
   def show
-    user = User.find(params[:id])
+    if params[:id] == 'me'
+      raise ActiveRecord::RecordNotFound if !current_user
+
+      user = current_user
+    else
+      user = User.find(params[:id])
+    end
     render json: {
       data: UserSerializer.new(user, self).serialize
     }

@@ -59,6 +59,8 @@ Updated <<User>> structure.
 
 `GET /users/:id.json`
 
+Client COULD use `me` as `:id` to show current user.
+
 *Response*
 
 <<User>> structure.
