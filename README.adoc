@@ -1,7 +1,7 @@
 = SpeakCoding API
 :toc:
 
-SpeakCoding API conforms to https://jsonapi.org/[JSON:API] standard.
+SpeakCoding Instagram API conforms to https://jsonapi.org/[JSON:API] standard.
 
 == Authentication
 

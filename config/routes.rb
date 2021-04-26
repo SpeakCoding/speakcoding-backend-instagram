@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [:create, :update, :destroy]
+
+  namespace :service do
+    resources :users, only: [:show, :create]
+  end
 end
