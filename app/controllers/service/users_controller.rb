@@ -14,7 +14,13 @@ class Service::UsersController < ApplicationController
     password = SecureRandom.alphanumeric(25)
     user = User.create!(
       email: email,
-      password: password)
+      password: password
+    )
+    # Followships with seed users
+    User.where(seed: true).first(5).each do |seed_user|
+      user.follow(seed_user)
+      seed_user.follow(user)
+    end
     render json: {
       data: UserSerializer.new(user, self).serialize,
       meta: {
@@ -28,7 +34,7 @@ class Service::UsersController < ApplicationController
 
   def authenticate_service
     jwt = JWT.decode(params[:auth], ENV['SPEAKCODING_INSTAGRAM_SERVICE_SECRET_KEY'])
-    return if 10.seconds.ago.to_i < jwt[0]['now']
+    return if 10.seconds.ago.to_i <= jwt[0]['now']
 
     render_unauthorized
   end
