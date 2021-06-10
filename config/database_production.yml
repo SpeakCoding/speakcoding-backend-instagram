@@ -1,9 +1,0 @@
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: speakcoding-backend-instagram
-  pool: 5
-  username: sc
-  password: qGJGaDciMNH9sVRdvRam
-  host: localhost
-  port: 5432
