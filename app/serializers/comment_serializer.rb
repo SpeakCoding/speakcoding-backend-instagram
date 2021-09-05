@@ -4,12 +4,12 @@ class CommentSerializer < ApplicationSerializer
     @controller = controller
   end
 
-  def serialize
-    {
+  def serialize()
+    return {
       id: @comment.id,
-      user: UserSerializer.new(@comment.user, @controller).serialize,
+      user: UserSerializer.new(@comment.user, @controller).serialize(),
       text: @comment.text,
-      created_at: @comment.created_at.to_i
+      created_at: @comment.created_at.to_i()
     }
   end
 end

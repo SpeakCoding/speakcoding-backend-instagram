@@ -4,9 +4,9 @@ class UserPostTagSerializer < ApplicationSerializer
     @controller = controller
   end
 
-  def serialize
-    {
-      user: UserSerializer.new(@tag.user).serialize,
+  def serialize()
+    return {
+      user: UserSerializer.new(@tag.user).serialize(),
       left: @tag.left,
       top: @tag.top
     }
