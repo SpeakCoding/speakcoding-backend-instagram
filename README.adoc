@@ -272,6 +272,10 @@ Parameters:
 |String
 |Comment text
 
+|comment[reply_id]
+|Integer
+|Parent comment ID
+
 |===
 
 *Response*
@@ -431,6 +435,10 @@ Deleted <<Comment>> structure (state before deletion).
 |text
 |String
 |Comment text
+
+|reply_id
+|Integer
+|Parent comment ID
 
 |created_at
 |Integer
